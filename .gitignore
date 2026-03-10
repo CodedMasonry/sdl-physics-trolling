@@ -36,6 +36,7 @@
 *.exe
 *.out
 *.app
+sdl_physics_trolling
 
 # debug information files
 *.dwo
