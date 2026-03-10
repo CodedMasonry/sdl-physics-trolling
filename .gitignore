@@ -43,3 +43,6 @@ sdl_physics_trolling
 
 # debug information files
 *.dwo
+
+# Generated Config Files
+imgui.ini
