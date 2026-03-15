@@ -15,7 +15,6 @@ struct AppState {
   SDL_GPUDevice *gpu_device = nullptr;
 
   bool show_demo_window = true;
-  bool show_another_window = false;
   ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 };
 
@@ -139,7 +138,6 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
     ImGui::Begin("Hello, world!");
     ImGui::Text("This is some useful text.");
     ImGui::Checkbox("Demo Window", &app->show_demo_window);
-    ImGui::Checkbox("Another Window", &app->show_another_window);
     ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
     ImGui::ColorEdit3("clear color", (float *)&app->clear_color);
 
@@ -151,15 +149,6 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
     ImGuiIO &io = ImGui::GetIO();
     ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
                 1000.0f / io.Framerate, io.Framerate);
-    ImGui::End();
-  }
-
-  // Another window
-  if (app->show_another_window) {
-    ImGui::Begin("Another Window", &app->show_another_window);
-    ImGui::Text("Hello from another window!");
-    if (ImGui::Button("Close Me"))
-      app->show_another_window = false;
     ImGui::End();
   }
 
