@@ -2,6 +2,7 @@
 #include "imgui.h"
 #include "imgui_impl_sdl3.h"
 #include "imgui_impl_sdlgpu3.h"
+#include "implot3d.h"
 #include <SDL3/SDL.h>
 #include <SDL3/SDL_main.h>
 #include <stdio.h>
@@ -14,7 +15,6 @@ struct AppState {
   SDL_Window *window = nullptr;
   SDL_GPUDevice *gpu_device = nullptr;
 
-  bool show_demo_window = true;
   ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
 };
 
@@ -65,6 +65,7 @@ SDL_AppResult SDL_AppInit(void **appstate, int argc, char **argv) {
   // Setup Dear ImGui context
   IMGUI_CHECKVERSION();
   ImGui::CreateContext();
+  ImPlot3D::CreateContext();
   ImGuiIO &io = ImGui::GetIO();
   io.ConfigFlags |= ImGuiConfigFlags_NavEnableKeyboard;
   io.ConfigFlags |= ImGuiConfigFlags_NavEnableGamepad;
@@ -126,10 +127,6 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
   ImGui_ImplSDL3_NewFrame();
   ImGui::NewFrame();
 
-  // Demo window
-  if (app->show_demo_window)
-    ImGui::ShowDemoWindow(&app->show_demo_window);
-
   // Simple "Hello, world!" window
   {
     static float f = 0.0f;
@@ -137,7 +134,6 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
 
     ImGui::Begin("Hello, world!");
     ImGui::Text("This is some useful text.");
-    ImGui::Checkbox("Demo Window", &app->show_demo_window);
     ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
     ImGui::ColorEdit3("clear color", (float *)&app->clear_color);
 
@@ -171,8 +167,8 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
     SDL_GPUColorTargetInfo target_info = {};
     target_info.texture = swapchain_texture;
     target_info.clear_color =
-        SDL_FColor{app->clear_color.x, app->clear_color.y,
-                   app->clear_color.z, app->clear_color.w};
+        SDL_FColor{app->clear_color.x, app->clear_color.y, app->clear_color.z,
+                   app->clear_color.w};
     target_info.load_op = SDL_GPU_LOADOP_CLEAR;
     target_info.store_op = SDL_GPU_STOREOP_STORE;
 
@@ -194,6 +190,7 @@ void SDL_AppQuit(void *appstate, SDL_AppResult result) {
   SDL_WaitForGPUIdle(app->gpu_device);
   ImGui_ImplSDL3_Shutdown();
   ImGui_ImplSDLGPU3_Shutdown();
+  ImPlot3D::DestroyContext();
   ImGui::DestroyContext();
 
   SDL_ReleaseWindowFromGPUDevice(app->gpu_device, app->window);
