@@ -1,5 +1,3 @@
 #include <SDL3/SDL.h>
 
-void draw_object() {
-
-}
+void render_physics_window() {}
