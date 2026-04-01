@@ -12,13 +12,13 @@
 #include "rocket.h"
 
 struct AppState {
+  // Rocket
+  RocketState rocket_state{};
+
   // SDL
   SDL_Window *window = nullptr;
   SDL_GPUDevice *gpu_device = nullptr;
-  // ImGUI
   ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
-  // Rocket
-  RocketState rocket_state;
 };
 
 // Called once at startup
@@ -137,7 +137,7 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
   ImGui::NewFrame();
 
   // Render Physics Telemetry
-  render_rocket_telemetry();
+  render_rocket_telemetry(&app->rocket_state);
 
   /*
    * Rendering
