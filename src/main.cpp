@@ -9,7 +9,7 @@
 #include <stdlib.h>
 
 // Local
-#include "physics.cpp"
+#include "physics.h"
 
 struct AppState {
   SDL_Window *window = nullptr;
@@ -147,6 +147,11 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
                 1000.0f / io.Framerate, io.Framerate);
     ImGui::End();
   }
+
+  // Physics window
+  static bool toggleDemo = true;
+  ImGui::ShowDemoWindow(&toggleDemo);
+  ImPlot3D::ShowDemoWindow();
 
   // Rendering
   ImGui::Render();
