@@ -6,7 +6,7 @@
 EXE = sdl_physics_trolling
 IMGUI_DIR = vendor/imgui
 IMPLOT3D_DIR = vendor/implot3d
-SOURCES = src/main.cpp src/physics.cpp
+SOURCES = src/main.cpp src/rocket.cpp
 
 SOURCES += $(IMGUI_DIR)/imgui.cpp $(IMGUI_DIR)/imgui_draw.cpp $(IMGUI_DIR)/imgui_tables.cpp $(IMGUI_DIR)/imgui_widgets.cpp
 SOURCES += $(IMGUI_DIR)/backends/imgui_impl_sdl3.cpp $(IMGUI_DIR)/backends/imgui_impl_sdlgpu3.cpp

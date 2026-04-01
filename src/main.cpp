@@ -9,13 +9,16 @@
 #include <stdlib.h>
 
 // Local
-#include "physics.h"
+#include "rocket.h"
 
 struct AppState {
+  // SDL
   SDL_Window *window = nullptr;
   SDL_GPUDevice *gpu_device = nullptr;
-
+  // ImGUI
   ImVec4 clear_color = ImVec4(0.45f, 0.55f, 0.60f, 1.00f);
+  // Rocket
+  RocketState rocket_state;
 };
 
 // Called once at startup
@@ -122,38 +125,23 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
     return SDL_APP_CONTINUE;
   }
 
-  // Start the Dear ImGui frame
+  /*
+   * Tick Simulation
+   */
+
+  /*
+   * UI Logic
+   */
   ImGui_ImplSDLGPU3_NewFrame();
   ImGui_ImplSDL3_NewFrame();
   ImGui::NewFrame();
 
-  // Simple "Hello, world!" window
-  {
-    static float f = 0.0f;
-    static int counter = 0;
+  // Render Physics Telemetry
+  render_rocket_telemetry();
 
-    ImGui::Begin("Hello, world!");
-    ImGui::Text("This is some useful text.");
-    ImGui::SliderFloat("float", &f, 0.0f, 1.0f);
-    ImGui::ColorEdit3("clear color", (float *)&app->clear_color);
-
-    if (ImGui::Button("Button"))
-      counter++;
-    ImGui::SameLine();
-    ImGui::Text("counter = %d", counter);
-
-    ImGuiIO &io = ImGui::GetIO();
-    ImGui::Text("Application average %.3f ms/frame (%.1f FPS)",
-                1000.0f / io.Framerate, io.Framerate);
-    ImGui::End();
-  }
-
-  // Physics window
-  static bool toggleDemo = true;
-  ImGui::ShowDemoWindow(&toggleDemo);
-  ImPlot3D::ShowDemoWindow();
-
-  // Rendering
+  /*
+   * Rendering
+   */
   ImGui::Render();
   ImDrawData *draw_data = ImGui::GetDrawData();
   const bool minimized =
