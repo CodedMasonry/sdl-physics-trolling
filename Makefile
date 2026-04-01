@@ -12,10 +12,6 @@ SOURCES += $(IMGUI_DIR)/imgui.cpp $(IMGUI_DIR)/imgui_draw.cpp $(IMGUI_DIR)/imgui
 SOURCES += $(IMGUI_DIR)/backends/imgui_impl_sdl3.cpp $(IMGUI_DIR)/backends/imgui_impl_sdlgpu3.cpp
 SOURCES += $(IMPLOT3D_DIR)/implot3d.cpp $(IMPLOT3D_DIR)/implot3d_items.cpp
 
-# Demos
-SOURCES += $(IMGUI_DIR)/imgui_demo.cpp $(IMPLOT3D_DIR)/implot3d_demo.cpp $(IMPLOT3D_DIR)/implot3d_meshes.cpp
-
-
 OBJS = $(addsuffix .o, $(basename $(notdir $(SOURCES))))
 UNAME_S := $(shell uname -s)
 
