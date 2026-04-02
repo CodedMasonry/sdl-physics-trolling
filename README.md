@@ -12,3 +12,4 @@ I really need to learn C++
 - [ ] Adding onto 3d point mass
   - [ ] Newtonian Drag
   - [ ] Mass(ed?) Propulsion
+- [ ] 3d cylinder (hopefully)
