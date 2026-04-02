@@ -13,3 +13,6 @@ I really need to learn C++
   - [ ] Newtonian Drag
   - [ ] Mass(ed?) Propulsion
 - [ ] 3d cylinder (hopefully)
+
+> [!NOTE]
+> If building, uncomment `#define ImDrawIdx unsigned int` in the imconfig.h for imgui
