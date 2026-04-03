@@ -128,6 +128,7 @@ SDL_AppResult SDL_AppIterate(void *appstate) {
   /*
    * Tick Simulation
    */
+  tick_rocket_simulation(&app->rocket_state);
 
   /*
    * UI Logic

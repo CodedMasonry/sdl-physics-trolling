@@ -3,7 +3,9 @@
 #include "implot3d.h"
 #include <SDL3/SDL.h>
 
-void tick_rocket_simulation(RocketState *rocket_state) {}
+void tick_rocket_simulation(RocketState *rocket_state) {
+  static float gravity = 9.81;
+}
 
 void render_rocket_telemetry(RocketState *rocket_state) {
   ImPlot3DAxisFlags flagsXY = ImPlot3DFlags_Equal | ImPlot3DAxisFlags_AutoFit;
